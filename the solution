@@ -1,0 +1,81 @@
+class Patient:
+    def __init__(self, first_name, middle_name, last_name, address, city, state, zip_code, phone_number, emergency_contact_name, emergency_contact_phone):
+        self.first_name = first_name
+        self.middle_name = middle_name
+        self.last_name = last_name
+        self.address = address
+        self.city = city
+        self.state = state
+        self.zip_code = zip_code
+        self.phone_number = phone_number
+        self.emergency_contact_name = emergency_contact_name
+        self.emergency_contact_phone = emergency_contact_phone
+
+    # Accessor methods
+    def get_full_name(self):
+        return f"{self.first_name} {self.middle_name} {self.last_name}"
+
+    def get_address(self):
+        return f"{self.address}, {self.city}, {self.state} {self.zip_code}"
+
+    def get_phone_number(self):
+        return self.phone_number
+
+    def get_emergency_contact_info(self):
+        return f"{self.emergency_contact_name}: {self.emergency_contact_phone}"
+
+
+class Procedure:
+    def __init__(self, name, date, practitioner, charge):
+        self.name = name
+        self.date = date
+        self.practitioner = practitioner
+        self.charge = charge
+
+    # Accessor methods
+    def get_info(self):
+        return f"Procedure: {self.name}\nDate: {self.date}\nPractitioner: {self.practitioner}\nCharge: ${self.charge:.2f}"
+
+
+# Updated patient data
+patient_data = {
+    "first_name": "Retaj",
+    "middle_name": "Ben",
+    "last_name": "Taboun",
+    "address": "Tripoli-Libya",
+    "city": "",
+    "state": "",
+    "zip_code": "",
+    "phone_number": "541-796-2270",
+    "emergency_contact_name": "Retaj Ben Taboun",
+    "emergency_contact_phone": "Retajbentaboun@gmail.com"
+}
+
+# Sample data for procedures with the updated date
+procedure_data = [
+    {"name": "Physical Exam", "date": "30/12/2023", "practitioner": "Dr. Irvine", "charge": 250.00},
+    {"name": "X-ray", "date": "30/12/2023", "practitioner": "Dr. Jamison", "charge": 500.00},
+    {"name": "Blood Test", "date": "30/12/2023", "practitioner": "Dr. Smith", "charge": 200.00}
+]
+
+# Create instances of Patient and Procedure classes
+patient = Patient(**patient_data)
+procedures = [Procedure(**data) for data in procedure_data]
+
+# Display patient information
+print("Patient Information:")
+print("Name:", patient.get_full_name())
+print("Address:", patient.get_address())
+print("Phone Number:", patient.get_phone_number())
+print("Emergency Contact:", patient.get_emergency_contact_info())
+print("\nProcedure Information:")
+
+# Display information about each procedure
+total_charges = 0
+for procedure in procedures:
+    print(procedure.get_info())
+    print()
+    total_charges += procedure.charge
+
+# Display total charges
+print("Total Charges for all Procedures: ${:.2f}".format(total_charges))
